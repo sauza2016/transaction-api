@@ -1,0 +1,42 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: transaction-db
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: transactions_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - transaction_postgres_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d transactions_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  wiremock:
+    image: wiremock/wiremock:3.13.2
+    container_name: transaction-provider-mock
+    restart: unless-stopped
+
+    ports:
+      - "8081:8080"
+
+    volumes:
+      - ./wiremock:/home/wiremock
+
+    entrypoint:
+      - /docker-entrypoint.sh
+      - --disable-http2-plain
+      - --disable-gzip
+      - --verbose
+
+volumes:
+  transaction_postgres_data:

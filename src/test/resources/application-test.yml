@@ -1,0 +1,17 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: false
+
+  test:
+    database:
+      replace: none
+
+logging:
+  level:
+    root: WARN
+    com.spin.transaction: INFO

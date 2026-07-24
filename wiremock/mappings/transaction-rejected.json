@@ -1,0 +1,29 @@
+{
+  "priority": 1,
+  "request": {
+    "method": "POST",
+    "urlPath": "/transactions",
+    "headers": {
+      "Content-Type": {
+        "contains": "application/json"
+      }
+    },
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": "$[?(@.amount > 5000)]"
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "transactionId": "PROVIDER-TX-REJECTED-001",
+      "approved": false,
+      "balanceAfter": 3000.00,
+      "message": "Transaction rejected by external provider"
+    }
+  }
+}

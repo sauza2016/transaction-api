@@ -1,0 +1,71 @@
+HELP.md
+
+# Maven
+target/
+
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Logs
+*.log
+logs/
+
+# Spring Boot
+*.pid
+*.seed
+*.pid.lock
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Eclipse / STS
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# VS Code
+.vscode/
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Coverage
+coverage/
+jacoco.exec
+
+# Generated reports
+surefire-reports/
+failsafe-reports/
+
+# Environment files
+.env
+.env.*
+
+# Mac/Linux
+.Trashes

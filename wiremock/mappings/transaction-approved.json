@@ -1,0 +1,24 @@
+{
+  "priority": 10,
+  "request": {
+    "method": "POST",
+    "urlPath": "/transactions",
+    "headers": {
+      "Content-Type": {
+        "contains": "application/json"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "transactionId": "PROVIDER-TX-001",
+      "approved": true,
+      "balanceAfter": 8500.00,
+      "message": "Transaction approved by external provider"
+    }
+  }
+}
