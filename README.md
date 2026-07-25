@@ -668,6 +668,22 @@ docker compose down -v
 
 ---
 
+## AI Assistance
+
+AI tools (ChatGPT) were used as a productivity aid during the development of this project.
+
+Specifically, they were used for:
+
+- Generating boilerplate code for simple classes (DTOs, models, and configuration classes).
+- Assisting with the generation and refinement of the OpenAPI/Swagger documentation.
+- Reviewing and improving the README documentation.
+- Discussing implementation alternatives and validating design decisions.
+- Assisting with debugging and troubleshooting during development.
+
+All architecture decisions, business logic, implementation, testing, and final code review were performed and validated by the author. I understand and can explain every part of the delivered solution.
+
+---
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
