@@ -1,48 +1,44 @@
 package com.spin.transaction.controller;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.math.BigDecimal;
+import java.time.Instant;
+import java.util.List;
+import java.util.UUID;
+
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import tools.jackson.databind.json.JsonMapper;
 import com.spin.transaction.application.port.in.CreateTransactionUseCase;
 import com.spin.transaction.application.port.in.GetTransactionsUseCase;
 import com.spin.transaction.controller.advice.GlobalExceptionHandler;
 import com.spin.transaction.domain.enums.Currency;
 import com.spin.transaction.domain.enums.TransactionStatus;
 import com.spin.transaction.domain.enums.TransactionType;
+import com.spin.transaction.domain.exception.BusinessValidationException;
+import com.spin.transaction.domain.exception.ProviderCommunicationException;
 import com.spin.transaction.domain.model.Transaction;
 import com.spin.transaction.dto.request.CreateTransactionRequest;
 import com.spin.transaction.dto.response.TransactionResponse;
 import com.spin.transaction.mapper.TransactionApiMapper;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.mockito.Mockito.verifyNoInteractions;
 
-import static org.mockito.Mockito.never;
-
-import com.spin.transaction.domain.exception.BusinessValidationException;
-import com.spin.transaction.domain.exception.ProviderCommunicationException;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-
-import java.time.Instant;
-import java.util.List;
-import java.util.UUID;
-
-import java.math.BigDecimal;
-import java.time.Instant;
-import java.util.UUID;
-
-import org.junit.jupiter.api.Test;
-import org.springframework.http.MediaType;
+import tools.jackson.databind.json.JsonMapper;
 
 @WebMvcTest(TransactionController.class)
 @Import(GlobalExceptionHandler.class)
