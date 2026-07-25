@@ -1,5 +1,5 @@
 # Transaction Service
-
+[![CI](https://github.com/sauza2016/transaction-api/actions/workflows/ci.yml/badge.svg)](https://github.com/sauza2016/transaction-api/actions/workflows/ci.yml)
 ![Java](https://img.shields.io/badge/Java-21-ED8B00?logo=openjdk&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.0-6DB33F?logo=springboot&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-4169E1?logo=postgresql&logoColor=white)
@@ -12,11 +12,30 @@ A RESTful API built with **Java 21** and **Spring Boot 4** for processing credit
 
 The application validates business rules, communicates with an external transaction provider, persists transaction records in PostgreSQL, and exposes REST endpoints for transaction creation and retrieval.
 
+## Features
+
+- RESTful Transaction API
+- Hexagonal Architecture (Ports and Adapters)
+- Java 21 & Spring Boot 4
+- PostgreSQL persistence
+- External transaction provider integration
+- OpenAPI / Swagger UI
+- Testcontainers + WireMock integration tests
+- Docker Compose
+- GitHub Actions CI
+- Postman Collection with automated validations
+
+
 ---
 
 ## Architecture
 
 The project follows **Hexagonal Architecture (Ports and Adapters)** to keep business logic independent from frameworks, persistence mechanisms, and external services.
+
+![Architecture](docs/architecture.png)
+
+<details>
+<summary><strong>Mermaid Diagram</strong></summary>
 
 ```mermaid
 flowchart LR
@@ -56,6 +75,8 @@ flowchart LR
     PersistenceAdapter --> Database
     ProviderAdapter --> ExternalProvider
 ```
+
+</details>
 
 ### Dependency direction
 
@@ -171,8 +192,8 @@ src
 │   │   └── com.spin.transaction
 │   │       ├── application
 │   │       │   ├── port
-│   │       │   │   ├── input
-│   │       │   │   └── output
+│   │       │   │   ├── in
+│   │       │   │   └── out
 │   │       │   └── service
 │   │       ├── controller
 │   │       ├── domain
@@ -220,6 +241,12 @@ Start PostgreSQL with Docker Compose:
 
 ```bash
 docker compose up -d
+```
+
+Verify that PostgreSQL is running:
+
+```bash
+docker compose ps
 ```
 
 The command downloads the PostgreSQL image when necessary, creates the `transactions_db` database, and exposes PostgreSQL on port `5432`.
@@ -275,6 +302,8 @@ mvnw.cmd spring-boot:run
 ```bash
 ./mvnw spring-boot:run
 ```
+
+The application automatically creates the required database schema using Hibernate during startup.
 
 The API starts at:
 
@@ -473,7 +502,26 @@ Testcontainers provides an isolated PostgreSQL instance, while WireMock provides
 
 ---
 
+## Continuous Integration
+
+The project includes a GitHub Actions pipeline that automatically:
+
+- Builds the application
+- Executes all unit tests
+- Executes all integration tests
+- Verifies the Maven build
+
+![GitHub Actions](docs/github-actions.png)
+
+---
+
 ## API Documentation
+
+### Swagger UI Preview
+
+The application exposes interactive API documentation through Swagger UI.
+
+![Swagger UI](docs/swagger-ui.png)
 
 After starting the application, Swagger UI is available at:
 
@@ -495,6 +543,8 @@ http://localhost:8080/v3/api-docs
 ## Postman Collection
 
 A Postman collection is included with the project to simplify manual API testing and endpoint validation.
+
+![Postman Collection](docs/postman.png)
 
 ### Location
 
@@ -614,3 +664,10 @@ docker compose down -v
 - Add pagination to transaction retrieval.
 - Add integration scenarios for timeouts and malformed provider responses.
 - Replace local credentials with environment-based configuration.
+
+
+---
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
